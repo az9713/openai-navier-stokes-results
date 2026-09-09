@@ -1,5 +1,6 @@
 import VortexDemoLazy from '@/components/vortex-demo-lazy';
 import Guide from './guide.mdx';
+import OriginalResponse from './original-response.mdx';
 
 export default function Home() {
   return (
@@ -8,9 +9,9 @@ export default function Home() {
         <nav className="topbar" aria-label="Page navigation">
           <a className="wordmark" href="#top">NS / 2026</a>
           <div className="nav-links">
-            <a href="#result">Result</a>
-            <a href="#mechanism">Mechanism</a>
-            <a href="#distance">What remains</a>
+            <a href="#original-response">Original answer</a>
+            <a href="#model">Interactive model</a>
+            <a href="#expanded-guide">Expanded guide</a>
           </div>
         </nav>
 
@@ -43,7 +44,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="demo-section" aria-labelledby="demo-title">
+      <section className="demo-section" id="model" aria-labelledby="demo-title">
         <div className="section-kicker">Reduced scaling model</div>
         <h2 id="demo-title">Enter the contracting vortex core</h2>
         <p className="section-lead">
@@ -54,8 +55,31 @@ export default function Home() {
         <VortexDemoLazy />
       </section>
 
-      <section className="article-shell" id="result">
-        <article className="guide">
+      <section className="article-shell original-shell" id="original-response">
+        <header className="article-intro">
+          <p className="section-kicker">Original response — preserved</p>
+          <h2>The complete answer first given in this conversation</h2>
+          <p>
+            This section preserves the original analysis and its structure, including the
+            requested assessment of how far the result is from “completely solving”
+            Navier–Stokes. Local repository filenames are retained as audit references.
+          </p>
+        </header>
+        <article className="guide original-guide">
+          <OriginalResponse />
+        </article>
+      </section>
+
+      <section className="article-shell expanded-shell" id="expanded-guide">
+        <header className="article-intro">
+          <p className="section-kicker">Expanded interactive guide</p>
+          <h2>The same result developed through scaling and mechanism</h2>
+          <p>
+            The material below complements the preserved answer with a more granular
+            mathematical walkthrough tied to the interactive vortex model.
+          </p>
+        </header>
+        <article className="guide expanded-guide">
           <Guide />
         </article>
       </section>

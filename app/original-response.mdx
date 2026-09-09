@@ -1,0 +1,250 @@
+## Bottom line
+
+OpenAI has **not found a formula or general algorithm for solving arbitrary Navier–Stokes flows**. It claims something more specific but mathematically historic:
+
+> A carefully constructed, smooth, externally forced, three-dimensional incompressible Navier–Stokes flow starts from rest, retains finite kinetic energy, yet develops unbounded velocity in finite time.
+
+If the 166-page analytical proof and its Lean formalization survive independent scrutiny, this is sufficient to resolve the **Clay Millennium Prize Problem exactly as officially formulated**, through alternatives C and D. But as of September 8, 2026, it is a newly released, self-assessed claimed solution—not yet an officially accepted Clay solution. The Clay website still labels the problem “Unsolved.” [OpenAI announcement](https://openai.com/index/navier-stokes-solution/), [paper](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf), [Clay status](https://www.claymath.org/millennium/navier-stokes-equation/).
+
+## 1. Minimal Navier–Stokes background
+
+For an incompressible fluid of constant density,
+
+$$
+\partial_t u+(u\cdot\nabla)u-\nu\Delta u+\nabla p=f,
+\qquad \nabla\cdot u=0.
+$$
+
+Here:
+
+- $u(x,t)$ is velocity.
+- $p(x,t)$ is pressure divided by density.
+- $\nu>0$ is kinematic viscosity.
+- $f(x,t)$ is an externally applied body force.
+- $(u\cdot\nabla)u$ is nonlinear self-advection.
+- $\nu\Delta u$ diffuses and smooths velocity gradients.
+- $\nabla\cdot u=0$ enforces incompressibility.
+
+For a sufficiently smooth whole-space flow,
+
+$$
+\frac12\frac{d}{dt}\lVert u(t)\rVert_2^2
++\nu\lVert\nabla u(t)\rVert_2^2
+=\int_{\mathbb R^3}f\cdot u\,dx.
+$$
+
+The nonlinear term disappears from this *global* energy balance, but it can transfer energy between spatial scales.
+
+### Why three dimensions are difficult
+
+Let $\omega=\nabla\times u$ be vorticity. It obeys
+
+$$
+\partial_t\omega+(u\cdot\nabla)\omega
+=(\omega\cdot\nabla)u+\nu\Delta\omega+\nabla\times f.
+$$
+
+The dangerous term is
+
+$$
+(\omega\cdot\nabla)u,
+$$
+
+which stretches vortex lines. In two dimensions this vortex-stretching mechanism is absent, and global smoothness is known. In three dimensions, stretching may concentrate vorticity faster than viscosity dissipates it.
+
+The energy bound alone is too weak because Navier–Stokes is energy-supercritical under its natural scaling. Concentration on progressively smaller regions can make pointwise velocity or derivatives diverge while total energy remains finite.
+
+### What was known before this claim
+
+- Smooth 3D data have unique smooth solutions for a sufficiently short time.
+- Sufficiently small data have global smooth solutions.
+- Leray constructed global finite-energy weak solutions in 1934.
+- Global smoothness and uniqueness for arbitrary large 3D data remained unknown.
+- Caffarelli–Kohn–Nirenberg showed that the possible singular set of suitable weak solutions is extremely small, but did not prove it empty.
+- Many conditional regularity criteria are known—for example, boundedness in the scale-critical $L^\infty_tL^3_x$ class prevents blowup.
+
+These facts are summarized in the [official Clay problem statement](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf).
+
+## 2. What the Millennium problem actually permits
+
+Clay’s formulation offers four acceptable alternatives:
+
+- **A:** global smoothness for every smooth, rapidly decaying, unforced flow on $\mathbb R^3$.
+- **B:** global smoothness for every smooth, unforced, periodic flow on $\mathbb T^3$.
+- **C:** exhibit smooth initial data and a smooth, rapidly decaying force on $\mathbb R^3$ for which no global smooth bounded-energy solution exists.
+- **D:** exhibit smooth periodic data and smooth forcing on $\mathbb T^3$ for which no global smooth periodic solution exists.
+
+OpenAI claims **C and D**, not A or B.
+
+That distinction is fundamental: C and D explicitly allow external forcing. Therefore a valid forced counterexample settles the published prize problem even though it does **not** settle unforced global regularity.
+
+Indeed, A and C are not logical opposites. It is possible in principle that:
+
+- every unforced smooth flow remains globally smooth, while
+- some specially forced smooth flow becomes singular.
+
+## 3. The exact OpenAI theorem
+
+For every viscosity $\nu>0$, OpenAI constructs:
+
+$$
+u(\cdot,0)=0,
+$$
+
+a force
+
+$$
+f\in C_c^\infty(\mathbb R^3\times(0,\infty);\mathbb R^3),
+$$
+
+and velocity and pressure smooth for $0\le t<1$, satisfying
+
+$$
+\sup_{t<1}\lVert u(t)\rVert_{L^2}<\infty,
+\qquad
+\limsup_{t\uparrow1}\lVert u(t)\rVert_{L^\infty}=\infty.
+$$
+
+Both velocity and pressure are spatially compactly supported before the singular time. The force is smooth through $t=1$, compactly supported in space and time, and nonzero.
+
+Because classical solutions with these data are unique on every interval $[0,T]$, $T<1$, any hypothetical global smooth bounded-energy solution would have to equal the constructed solution before time one. Its velocity would therefore also diverge, contradicting global smoothness. This is how the explicit pre-blowup construction proves the nonexistence statement required by alternative C.
+
+The compact support allows the construction to be rescaled into one periodic cube and periodically repeated, yielding alternative D. [Theorem 1.1 and Corollary 10.6](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf).
+
+## 4. Why “just choose a force” does not make the result trivial
+
+Given any arbitrarily selected velocity field, one can formally define
+
+$$
+f=\partial_tu+(u\cdot\nabla)u-\nu\Delta u+\nabla p.
+$$
+
+So it would be trivial to obtain a blowup using a force that itself becomes singular.
+
+Clay excludes that escape hatch: the force and all of its derivatives must remain smooth and rapidly decaying. OpenAI’s construction has diverging acceleration, pressure, transport and viscosity terms, but arranges extremely precise cancellations so that their sum—the external force—remains $C^\infty$.
+
+Once constructed, $f(x,t)$ is a fixed prescribed function. It is not an adaptive controller that observes the fluid and changes in response.
+
+## 5. Proposed singularity mechanism
+
+Write
+
+$$
+\tau=1-t.
+$$
+
+The central vortex contracts anisotropically:
+
+$$
+\ell_r\asymp\tau^{1/2},
+\qquad
+\ell_z\asymp\tau^{1/2-h},
+\qquad 0<h<1/100.
+$$
+
+Its dominant azimuthal and axial speeds grow as
+
+$$
+|u_\theta|,\ |u_z|\asymp\tau^{-1/2-h},
+$$
+
+while the radial speed is approximately $O(\tau^{-1/2})$.
+
+The core volume scales like
+
+$$
+\ell_r^2\ell_z\asymp\tau^{3/2-h}.
+$$
+
+Consequently, its kinetic energy scales approximately as
+
+$$
+(\text{volume})(\text{speed})^2
+\asymp
+\tau^{3/2-h}\tau^{-1-2h}
+=
+\tau^{1/2-3h}\longrightarrow0.
+$$
+
+This is the central counterintuitive point: **velocity becomes infinite inside a region whose volume shrinks even faster**, so bounded total energy does not prevent blowup.
+
+The proposed architecture is:
+
+1. Radial inflow carries angular momentum inward, spinning up an axisymmetric vortex.
+2. Incompressibility produces axial stretching and outflow.
+3. The shrinking background vortex alone would require a singular external force.
+4. The construction inserts increasingly fine oscillatory ring pulses.
+5. Their nonlinear momentum flux acts like a designed Reynolds stress and cancels the singular residual.
+6. Successive corrections eliminate the remaining errors to every order.
+7. The resulting residual extends smoothly through the singular time and becomes the permitted compactly supported force.
+
+The construction is related to cascade and convex-integration ideas, but the paper must control actual viscous Navier–Stokes dynamics rather than an averaged or modified equation.
+
+## 6. What is genuinely significant
+
+If correct, this establishes several firsts:
+
+- A finite-time singularity for the **actual** three-dimensional viscous incompressible Navier–Stokes equations—not a toy model, averaged nonlinearity or hypodissipative variant.
+- Smooth initial data—indeed, zero initial velocity.
+- A smooth, compactly supported force rather than a singular or barely integrable force.
+- Uniformly bounded kinetic energy through the pre-singular evolution.
+- Constructions on both $\mathbb R^3$ and $\mathbb T^3$.
+- A formal Lean proof aligned to the exact quantifiers of Clay alternatives C and D.
+- Potentially the first solution of a Millennium Prize Problem principally generated by an AI system.
+
+The conceptual lesson would be sharp: **viscosity plus finite energy does not categorically prevent nonlinear concentration when smooth forcing is allowed**.
+
+It would also validate a new mathematical production model: a large coordinated population of AI agents generating an immense proof architecture, followed by formalization and kernel checking.
+
+## 7. How far is it from “completely solving Navier–Stokes”?
+
+There are several different meanings of “solving”:
+
+| Target | OpenAI result | What remains |
+|---|---|---|
+| Clay alternatives C/D | Claimed complete proof | Independent audit and institutional acceptance |
+| Unforced 3D regularity, $f=0$ | Not solved | Whether arbitrary smooth unforced flows remain regular or blow up |
+| Generic forced flows | One existential, highly engineered example | Classification, robustness and genericity of singularities |
+| Arbitrary initial/boundary-value problems | Not addressed | Bounded domains, walls, inflow/outflow and arbitrary forcing |
+| General solution formula | Not addressed | No closed form comparable to the quadratic formula |
+| Universal computational solver | Not addressed | No new method that predicts arbitrary turbulence |
+| Post-singularity evolution | Not addressed | Existence, selection and uniqueness of weak continuations |
+| Physical-fluid consequences | Limited | Compressibility, molecular scales and other physics intervene before literal infinite speed |
+
+So the correct assessment is:
+
+- **Distance to resolving the formal Millennium question:** mathematically zero *if the proof is correct*.
+- **Distance to official recognition:** at least substantial time and independent review.
+- **Distance to resolving unforced 3D Navier–Stokes:** still essentially the full open problem.
+- **Distance to a complete theory or general solver for fluid motion:** enormous; the present theorem was never intended to supply one.
+
+No meaningful percentage can be assigned to that last distance.
+
+## 8. Verification status today
+
+The local repository is substantial: 2,486 Lean files, including 643 Navier–Stokes files. Its metadata reports zero `sorry` placeholders in the proof and only the standard logical dependencies `propext`, `Classical.choice`, and `Quot.sound`. The final adapters reproduce the C and D quantifiers directly:
+
+- `formalization.yaml`
+- `ComparatorSolution.lean`
+- `ComparatorR3Theorem.lean`
+
+My static scan found no operative `sorry`, `admit`, or declared mathematical axioms outside the deliberately incomplete Comparator challenge files. I did **not** independently compile the entire formalization because the downloaded checkout lacks its Mathlib build/cache dependencies.
+
+Two cautions remain:
+
+1. The repository itself labels the review status **“self-assessed.”**
+2. Lean verifies the formal statement encoded in Lean. Humans must still audit that the definitions faithfully express classical Navier–Stokes, the regularity classes, decay assumptions and Clay’s intended statement. Quanta makes precisely this distinction. [Quanta’s same-day technical account](https://www.quantamagazine.org/ai-has-solved-one-of-maths-1-million-millennium-prize-problems-20260908/).
+
+Clay requires publication in a qualifying outlet, at least two years after publication, and general acceptance in the global mathematical community before considering a proposed solution. [Clay rules](https://www.claymath.org/millennium-problems/rules/).
+
+Thus the most accurate label today is:
+
+> **A formally encoded, newly released claimed resolution of the Millennium problem by forced finite-time blowup, with strong machine-checkability evidence but without mature independent or Clay acceptance.**
+
+## Best background reading order
+
+1. [Fefferman’s six-page official Clay statement](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf) — establishes exactly what counts.
+2. Sections 1–3 of the [OpenAI paper](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf) — theorem, physics and proof architecture.
+3. Section 10 of the paper — compact forcing, uniqueness comparison, viscosity rescaling and periodicization.
+4. [Quanta’s explanation](https://www.quantamagazine.org/ai-has-solved-one-of-maths-1-million-millennium-prize-problems-20260908/) — useful historical and community context.
+5. Terence Tao’s earlier [finite-time blowup result for an averaged Navier–Stokes equation](https://www.ams.org/jams/2016-29-03/S0894-0347-2015-00838-4/) — the clearest precursor showing why energy cancellation alone cannot prove regularity.
