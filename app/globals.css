@@ -112,6 +112,16 @@ h1 { max-width: 980px; margin-top: 18px; font-family: var(--font-serif), Georgia
 .original-guide { padding: 38px 40px 54px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(108,229,213,.035), rgba(5,16,21,.24)); box-shadow: 0 34px 90px rgba(0,0,0,.22); }
 .original-guide h2:first-child { color: var(--acid); }
 .guide > p:last-child { margin-top: 42px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.memory-citation {
+  margin: 42px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.018);
+  color: var(--muted);
+  font: 0.78rem/1.6 var(--font-mono), monospace;
+  white-space: pre-wrap;
+}
 
 @media (max-width: 820px) {
   .hero-shell { min-height: auto; }
