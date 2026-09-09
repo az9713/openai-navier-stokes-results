@@ -2,6 +2,8 @@ import VortexDemoLazy from '@/components/vortex-demo-lazy';
 import Guide from './guide.mdx';
 import OriginalResponse from './original-response.mdx';
 
+export const dynamic = 'force-static';
+
 export default function Home() {
   return (
     <main>
@@ -62,7 +64,7 @@ export default function Home() {
           <p>
             This section preserves the original analysis and its structure, including the
             requested assessment of how far the result is from “completely solving”
-            Navier–Stokes. Local repository filenames are retained as audit references.
+            Navier–Stokes. Repository filenames are linked to their public upstream sources.
           </p>
         </header>
         <article className="guide original-guide">

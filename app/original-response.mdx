@@ -224,9 +224,9 @@ No meaningful percentage can be assigned to that last distance.
 
 The local repository is substantial: 2,486 Lean files, including 643 Navier–Stokes files. Its metadata reports zero `sorry` placeholders in the proof and only the standard logical dependencies `propext`, `Classical.choice`, and `Quot.sound`. The final adapters reproduce the C and D quantifiers directly:
 
-- [formalization.yaml](C:/Users/simon/Downloads/navier_stokes_openai/NavierStokesAndEuler/formalization.yaml)
-- [ComparatorSolution.lean](C:/Users/simon/Downloads/navier_stokes_openai/NavierStokesAndEuler/NavierStokes/ComparatorSolution.lean)
-- [ComparatorR3Theorem.lean](C:/Users/simon/Downloads/navier_stokes_openai/NavierStokesAndEuler/NavierStokes/ComparatorR3Theorem.lean)
+- [formalization.yaml](https://github.com/openai/NavierStokesAndEuler/blob/main/formalization.yaml)
+- [ComparatorSolution.lean](https://github.com/openai/NavierStokesAndEuler/blob/main/NavierStokes/ComparatorSolution.lean)
+- [ComparatorR3Theorem.lean](https://github.com/openai/NavierStokesAndEuler/blob/main/NavierStokes/ComparatorR3Theorem.lean)
 
 My static scan found no operative `sorry`, `admit`, or declared mathematical axioms outside the deliberately incomplete Comparator challenge files. I did **not** independently compile the entire formalization because the downloaded checkout lacks its Mathlib build/cache dependencies.
 
@@ -248,12 +248,3 @@ Thus the most accurate label today is:
 3. Section 10 of the paper — compact forcing, uniqueness comparison, viscosity rescaling and periodicization.
 4. [Quanta’s explanation](https://www.quantamagazine.org/ai-has-solved-one-of-maths-1-million-millennium-prize-problems-20260908/) — useful historical and community context.
 5. Terence Tao’s earlier [finite-time blowup result for an averaged Navier–Stokes equation](https://www.ams.org/jams/2016-29-03/S0894-0347-2015-00838-4/) — the clearest precursor showing why energy cancellation alone cannot prove regularity.
-
-<pre className="memory-citation">{`<oai-mem-citation>
-<citation_entries>
-MEMORY.md:2802-2805|note=[Used prior guidance to distinguish proof architecture from unconditional global claims]
-</citation_entries>
-<rollout_ids>
-019ffcec-5356-7c53-9a6f-ff060096f245
-</rollout_ids>
-</oai-mem-citation>`}</pre>

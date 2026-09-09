@@ -11,8 +11,17 @@ const withMDX = createMDX({
   },
 });
 
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  ...(isGitHubPages
+    ? {
+        output: 'export' as const,
+        assetPrefix: '/openai-navier-stokes-results',
+        trailingSlash: true,
+      }
+    : {}),
 };
 
 export default withMDX(nextConfig);
