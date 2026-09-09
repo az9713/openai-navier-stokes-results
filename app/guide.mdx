@@ -1,0 +1,312 @@
+## 1. The governing equations: Newton’s law for a continuum
+
+A fluid is represented by fields rather than individual molecules. Its velocity changes because fluid parcels move, pressure redistributes momentum, viscosity smooths gradients, and external forces act on the fluid:
+
+$$
+\partial_t \mathbf{u}+(\mathbf{u}\!\cdot\!\nabla)\mathbf{u}
+-\nu\Delta\mathbf{u}+\nabla p=\mathbf{f},
+\qquad \nabla\!\cdot\!\mathbf{u}=0.
+$$
+
+Here $\mathbf{u}(x,t)$ is velocity, $p(x,t)$ is pressure divided by density, $\nu>0$ is kinematic viscosity, and $\mathbf{f}(x,t)$ is an externally prescribed body force. The second equation is incompressibility.
+
+The nonlinear term $(\mathbf{u}\cdot\nabla)\mathbf{u}$ is the source of the difficulty. It lets motion at one scale reorganize motion at another scale, even though it does not create total kinetic energy by itself.
+
+---
+
+## 2. Energy is finite—but finite energy does not bound speed
+
+Incompressibility makes the nonlinear transport term cancel when one integrates over all space. A smooth, decaying solution obeys the energy balance
+
+$$
+\frac{1}{2}\frac{d}{dt}\lVert \mathbf{u}(t)\rVert_{L^2}^2
++\nu\lVert\nabla\mathbf{u}(t)\rVert_{L^2}^2
+=\int_{\mathbb{R}^3}\mathbf{f}\cdot\mathbf{u}\,dx.
+$$
+
+The first term is the rate of change of kinetic energy, the second is viscous dissipation, and the right side is work done by the force. This identity controls the spatial integral of $|\mathbf{u}|^2$; it does not control the largest pointwise speed $\lVert\mathbf{u}\rVert_{L^\infty}$.
+
+A field can therefore grow extremely large on an extremely small set while keeping its integrated energy finite. That distinction is precisely what the interactive model above exposes.
+
+---
+
+## 3. Vorticity stretching: the uniquely three-dimensional danger
+
+The curl of velocity, $\boldsymbol\omega=\nabla\times\mathbf{u}$, measures local rotation. Taking the curl of Navier–Stokes gives
+
+$$
+\partial_t\boldsymbol\omega+(\mathbf{u}\cdot\nabla)\boldsymbol\omega
+=(\boldsymbol\omega\cdot\nabla)\mathbf{u}
++\nu\Delta\boldsymbol\omega+\nabla\times\mathbf{f}.
+$$
+
+The term $(\boldsymbol\omega\cdot\nabla)\mathbf{u}$ stretches vortex lines and can amplify vorticity. It is absent from the two-dimensional vorticity equation. This is why global smoothness is known in two dimensions while the three-dimensional problem remained resistant.
+
+Viscosity tries to diffuse concentrated vorticity. The open question was whether nonlinear amplification could outrun that diffusion without violating the energy constraint.
+
+---
+
+## 4. Scaling explains why the energy estimate is too weak
+
+The unforced equation is invariant under the rescaling
+
+$$
+\mathbf{u}_\lambda(x,t)=\lambda\mathbf{u}(\lambda x,\lambda^2 t),
+\qquad
+p_\lambda(x,t)=\lambda^2p(\lambda x,\lambda^2t).
+$$
+
+Under this transformation,
+
+$$
+\lVert\mathbf{u}_\lambda\rVert_{L^3}=\lVert\mathbf{u}\rVert_{L^3},
+\qquad
+\lVert\mathbf{u}_\lambda\rVert_{L^2}=\lambda^{-1/2}\lVert\mathbf{u}\rVert_{L^2}.
+$$
+
+The $L^3$ norm is scale-critical; energy lives in $L^2$, below the critical exponent. At increasingly fine scales, a concentration can carry less and less energy while becoming more singular. A proof of global regularity therefore needs structural information beyond the basic energy inequality.
+
+---
+
+## 5. The pre-2026 frontier: much was known, but not the binary answer
+
+Classical theory already supplied a sharp boundary around the unknown:
+
+- Smooth three-dimensional data have a unique smooth solution for a short time.
+- Sufficiently small data have global smooth solutions.
+- Leray constructed global finite-energy weak solutions in 1934.
+- Caffarelli, Kohn, and Nirenberg showed that the possible singular set of a suitable weak solution is extremely small, but did not prove it empty.
+- Conditional criteria show that certain scale-critical bounds prevent singularity.
+
+None of these results decided whether every arbitrary smooth three-dimensional flow remains smooth forever. The official six-page Clay statement remains the cleanest source for this background.
+
+---
+
+## 6. What Clay actually asked: four acceptable targets
+
+The official problem does not ask for a formula for every fluid flow. It asks for a proof of at least one of four propositions.
+
+**A and B—unforced global regularity.** For every permitted smooth initial velocity, with $\mathbf{f}=0$, prove a global smooth solution on either $\mathbb{R}^3$ or the periodic torus $\mathbb{T}^3$.
+
+**C and D—forced breakdown.** Exhibit permitted smooth initial data and a smooth force for which no global smooth solution exists, on $\mathbb{R}^3$ or $\mathbb{T}^3$.
+
+The logical asymmetry matters. A and B quantify over every initial datum but require zero force. C and D require only one counterexample and explicitly allow a force. OpenAI targets C and D. A valid proof of either is enough under Clay’s written formulation.
+
+---
+
+## 7. The exact claimed theorem
+
+OpenAI constructs, for every fixed viscosity $\nu>0$, a smooth compactly supported force and a solution that starts from rest:
+
+$$
+\mathbf{u}(\cdot,0)=0,
+\qquad
+\sup_{0\le t<1}\lVert\mathbf{u}(t)\rVert_{L^2}<\infty,
+\qquad
+\limsup_{t\uparrow1}\lVert\mathbf{u}(t)\rVert_{L^\infty}=\infty.
+$$
+
+The force satisfies
+
+$$
+\mathbf{f}\in C_c^\infty\!\left(\mathbb{R}^3\times(0,\infty);\mathbb{R}^3\right).
+$$
+
+Thus the force is infinitely differentiable and compactly supported in space and time. Velocity and pressure are smooth for every $t<1$ and supported inside one fixed compact spatial set. The theorem produces unbounded velocity—not merely unbounded derivatives—at time one.
+
+This is stronger than merely finding a rough or singular forcing term, and it matches the decay requirements of alternative C.
+
+---
+
+## 8. Why allowing a force does not trivialize the construction
+
+For any chosen velocity and pressure fields one can formally define their residual,
+
+$$
+\mathbf{R}(\mathbf{u},p)
+=\partial_t\mathbf{u}+(\mathbf{u}\cdot\nabla)\mathbf{u}
+-\nu\Delta\mathbf{u}+\nabla p,
+$$
+
+and declare $\mathbf{f}=\mathbf{R}$. That would be mathematically uninteresting if the resulting force became singular along with the velocity.
+
+The hard condition is
+
+$$
+\mathbf{u}\ \text{blows up},
+\qquad
+\mathbf{R}(\mathbf{u},p)\ \text{extends smoothly through }t=1.
+$$
+
+OpenAI’s construction makes the separate acceleration, transport, pressure, and viscous contributions large while arranging their sum to remain smooth to every derivative order. Once built, the force is a fixed function of position and time; it is not a controller that reacts to the evolving solution.
+
+---
+
+## 9. Geometry of the concentrating vortex
+
+Let $\tau=1-t$ denote the remaining time before singularity. The leading vortex contracts at different radial and axial rates:
+
+$$
+\ell_r\asymp\tau^{1/2},
+\qquad
+\ell_z\asymp\tau^{1/2-h},
+\qquad 0<h<\frac{1}{100}.
+$$
+
+Here $\ell_r$ is the radial core width, $\ell_z$ is its axial length scale, and $h$ is a small anisotropy exponent. The ratio
+
+$$
+\frac{\ell_r}{\ell_z}\asymp\tau^h\longrightarrow0
+$$
+
+shows that the core becomes an increasingly slender column. The demo’s anisotropy slider controls $h$; moving the time slider toward $100\%$ sends $\tau$ toward zero.
+
+The characteristic velocities satisfy
+
+$$
+|u_\theta|,|u_z|\asymp\tau^{-1/2-h},
+\qquad
+|u_r|=O(\tau^{-1/2}).
+$$
+
+Radial inflow carries angular momentum inward, spinning up the vortex. Incompressibility forces axial transport so fluid does not accumulate at the axis.
+
+---
+
+## 10. The key calculation: infinite speed with vanishing core energy
+
+The concentrating core occupies a volume of order
+
+$$
+V_{\mathrm{core}}\asymp\ell_r^2\ell_z
+\asymp\tau^{3/2-h}.
+$$
+
+Its largest velocity scale has square magnitude $\tau^{-1-2h}$. Multiplying speed squared by volume gives
+
+$$
+E_{\mathrm{core}}
+\asymp V_{\mathrm{core}}|u|^2
+\asymp\tau^{3/2-h}\tau^{-1-2h}
+=\tau^{1/2-3h}\longrightarrow0.
+$$
+
+Because $h<1/100$, the exponent $1/2-3h$ is positive. The singular core therefore carries vanishing energy even as its peak speed diverges. This is why the energy readout in the demo falls while the speed readout rises.
+
+The angular Reynolds number behaves differently:
+
+$$
+\mathrm{Re}_\theta
+=\frac{|u_\theta|\ell_r}{\nu}
+\asymp\frac{\tau^{-h}}{\nu}\longrightarrow\infty,
+\qquad
+\mathrm{Re}_r=O(\nu^{-1}).
+$$
+
+Angular motion becomes increasingly transport-dominated, while radial transport and diffusion remain in leading-order competition.
+
+---
+
+## 11. Oscillatory pulses cancel the singular residual
+
+The self-similar background vortex does not by itself solve Navier–Stokes with a smooth force. Its transition annulus leaves a singular momentum imbalance. The proof introduces successively finer oscillatory ring pulses whose averaged quadratic products generate a designed momentum flux.
+
+Schematically,
+
+$$
+\underbrace{\mathbf{R}_{\mathrm{background}}}_{\text{singular}}
++\underbrace{\nabla\cdot\langle\mathbf{w}\otimes\mathbf{w}\rangle}_{\text{pulse stress}}
++\underbrace{\mathbf{R}_{\mathrm{corrections}}}_{\text{all orders}}
+=\underbrace{\mathbf{f}}_{C^\infty}.
+$$
+
+The field $\mathbf{w}$ represents the oscillatory perturbations. Two pulse families provide independently tunable radial transport of angular and axial momentum. The background shear amplifies the pulses; changing wave orientation and viscosity eventually damp them. Further corrections force the remaining residual to vanish rapidly enough that every derivative extends smoothly through $t=1$.
+
+The pulse slider in the visualization is pedagogical: it exposes this cancellation role, but it does not reproduce the paper’s high-dimensional all-order construction.
+
+---
+
+## 12. From a blowing-up solution to nonexistence of every global smooth solution
+
+Constructing one pre-singular solution is not yet the exact Clay statement. Alternative C says that no global smooth bounded-energy solution exists for the same initial datum and force.
+
+The missing bridge is local uniqueness. Suppose a global smooth bounded-energy solution $\mathbf{v}$ existed. On every shorter interval $[0,T]$ with $T<1$, the paper’s comparison estimate gives
+
+$$
+\mathbf{v}(x,t)=\mathbf{u}(x,t).
+$$
+
+Therefore $\mathbf{v}$ inherits the constructed divergence as $t\uparrow1$, contradicting smoothness near the compact point $(0,1)$. The result rules out global classical continuation in the stated class; it does not rule out global weak solutions after singularity.
+
+---
+
+## 13. Every viscosity, whole space, and the periodic torus
+
+The construction is first normalized to viscosity one. For arbitrary $\nu>0$, spatial rescaling gives
+
+$$
+\mathbf{u}_\nu(x,t)=\sqrt{\nu}\,\mathbf{u}\!\left(\frac{x}{\sqrt{\nu}},t\right),
+\quad
+p_\nu(x,t)=\nu p\!\left(\frac{x}{\sqrt{\nu}},t\right),
+\quad
+\mathbf{f}_\nu(x,t)=\sqrt{\nu}\,\mathbf{f}\!\left(\frac{x}{\sqrt{\nu}},t\right).
+$$
+
+This preserves the singular time and yields a valid construction for every fixed positive viscosity. Compact support then permits the fields to be shrunk into the interior of a fundamental cube and repeated periodically without overlapping. That produces alternative D on $\mathbb{T}^3$.
+
+The result is therefore not confined to a vanishing-viscosity limit. But the force changes under the rescaling: it is an existential construction for each $\nu$, not one universal forcing experiment across all viscosities.
+
+---
+
+## 14. What the Lean formalization establishes—and what humans still audit
+
+The public repository exposes theorem adapters with the same outer quantifiers as Clay C and D. Its metadata reports zero proof placeholders and only Lean’s standard logical dependencies: propositional extensionality, classical choice, and quotient soundness.
+
+That materially strengthens confidence: a kernel can check that the encoded conclusion follows from the encoded definitions without trusting millions of informal algebraic steps.
+
+But formal verification has two layers:
+
+1. **Internal correctness:** does Lean accept the theorem from the definitions and permitted axioms?
+2. **Semantic correspondence:** do those definitions exactly capture classical Navier–Stokes, smoothness, decay, energy, periodicity, and the intended Clay statement?
+
+The second layer still requires mathematical audit. At release, the repository labels its review status “self-assessed.” The Clay Institute also requires publication in a qualifying outlet, at least two years, and general acceptance by the global mathematics community before it will consider a solution.
+
+---
+
+## 15. How far from “completely solving Navier–Stokes”?
+
+The phrase mixes several different goals.
+
+**The formal Clay question.** If the analytical proof and formalization are correct, the mathematical distance is zero: C and D are complete accepted target propositions.
+
+**The unforced problem.** The distance remains essentially the full problem. The paper explicitly proves that its force is nonzero. It gives no theorem deciding whether arbitrary smooth data with $\mathbf{f}=0$ remain regular or blow up.
+
+**A general solution theory.** The work does not classify all singularities, prove that blowup is stable or generic, select a unique weak continuation, or handle arbitrary bounded domains and boundary conditions.
+
+**A computational fluid solver.** It supplies no algorithm for predicting arbitrary turbulence, aircraft flows, weather, or blood circulation. The construction is a theorem-producing counterexample, not a replacement for computational fluid dynamics.
+
+**Physical fluids.** Literal infinite speed is a signal that the incompressible continuum idealization has exceeded its validity. Compressibility, molecular structure, heating, chemistry, and possibly relativistic constraints intervene before an actual fluid reaches infinity.
+
+The deepest synthesis is therefore
+
+$$
+\boxed{
+\text{Smooth forcing}+\text{positive viscosity}+\text{finite energy}
+\not\Rightarrow\text{global smoothness}
+}
+$$
+
+—if the proof survives scrutiny. That would close Clay’s written decision problem while opening a new research program: determine whether the mechanism can occur without forcing, whether it is stable, and what mathematically preferred continuation—if any—exists beyond blowup.
+
+---
+
+## Primary sources and further reading
+
+- [OpenAI announcement: On the Navier–Stokes Millennium Prize Problem](https://openai.com/index/navier-stokes-solution/)
+- [OpenAI paper: Finite Time Blowup for Navier–Stokes](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)
+- [Lean formalization repository](https://github.com/openai/NavierStokesAndEuler)
+- [Charles Fefferman’s official Clay problem description](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf)
+- [Clay’s Millennium Prize rules](https://www.claymath.org/millennium-problems/rules/)
+- [Terence Tao: finite-time blowup for an averaged Navier–Stokes equation](https://www.ams.org/jams/2016-29-03/S0894-0347-2015-00838-4/)
+
+*Status language on this page is anchored to the release date, September 8, 2026. Mathematical and institutional review may change after publication.*
