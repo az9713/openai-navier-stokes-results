@@ -105,8 +105,11 @@ h1 { max-width: 980px; margin-top: 18px; font-family: var(--font-serif), Georgia
 .guide .katex-display { margin: 30px 0; padding: 28px 22px; overflow-x: auto; border-left: 2px solid var(--cyan); background: linear-gradient(90deg, rgba(108,229,213,.075), rgba(108,229,213,.018)); color: #f0fbf9; }
 .guide .katex { font-size: 1.08em; }
 .guide blockquote { margin: 28px 0; padding: 18px 22px; border-left: 2px solid var(--amber); color: #d7c2ad; background: rgba(255,184,102,.05); }
-.guide table { width: 100%; margin: 30px 0 38px; border-collapse: collapse; color: #b9cecb; font-size: .93rem; line-height: 1.55; }
-.guide th, .guide td { padding: 15px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.guide table { width: 100%; margin: 30px 0 38px; border-collapse: collapse; table-layout: fixed; color: #b9cecb; font-size: .93rem; line-height: 1.55; }
+.guide th, .guide td { padding: 15px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.guide th:nth-child(1) { width: 26%; }
+.guide th:nth-child(2) { width: 24%; }
+.guide th:nth-child(3) { width: 50%; }
 .guide th { color: var(--ink); background: rgba(108,229,213,.075); font-weight: 750; }
 .guide tr:nth-child(even) td { background: rgba(255,255,255,.018); }
 .original-guide { padding: 38px 40px 54px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(108,229,213,.035), rgba(5,16,21,.24)); box-shadow: 0 34px 90px rgba(0,0,0,.22); }
@@ -131,7 +134,8 @@ h1 { max-width: 980px; margin-top: 18px; font-family: var(--font-serif), Georgia
   .verdict-card:last-child { border-bottom: 0; }
   .canvas-wrap { min-height: 430px; border-right: 0; border-bottom: 1px solid var(--line); }
   .guide .katex { font-size: .94em; }
-  .guide table { display: block; overflow-x: auto; font-size: .86rem; }
+  .guide table { font-size: .86rem; }
+  .guide th, .guide td { padding: 11px 9px; }
   .original-guide { padding: 26px 20px 38px; }
 }
 @media (max-width: 560px) {
