@@ -273,7 +273,33 @@ The second layer still requires mathematical audit. At release, the repository l
 
 ---
 
-## 15. How far from “completely solving Navier–Stokes”?
+## 15. Assuming the PDF is verified: why this result is a watershed
+
+Suppose the analytical argument in the PDF has been checked line by line and found correct. Under that assumption, the conditional language disappears from the mathematical theorem: this is a genuine finite-time blowup result for the classical three-dimensional incompressible Navier–Stokes equations with positive viscosity and a smooth external force.
+
+Its significance has several distinct layers.
+
+**It resolves the Clay problem as written.** The construction proves alternatives C and D: there are admissible smooth data and smooth forcing for which no global smooth bounded-energy solution exists, on both $\mathbb{R}^3$ and $\mathbb{T}^3$. Nothing further about the unforced alternatives A and B is logically required to answer Clay’s four-way question. Mathematical resolution and official prize recognition are different matters; the latter still follows Clay’s publication, waiting-period, and community-acceptance process.
+
+**It establishes blowup for the actual viscous equations.** Earlier landmark results produced blowup for modified or averaged equations, nonuniqueness among weak solutions, or singular behavior under rougher forcing. Here the equation is the standard Navier–Stokes system, $\nu$ is strictly positive, the initial velocity is zero, and the prescribed force is $C_c^\infty$. The singularity therefore cannot be dismissed as rough initial data, zero viscosity, a modified nonlinearity, or a force that itself becomes singular.
+
+**It identifies a precise failure of the regularizing intuition.** Viscosity smooths gradients and kinetic energy stays uniformly bounded, yet neither prevents pointwise velocity from diverging. The mechanism exploits concentration: the active region shrinks fast enough that its energy tends to zero while its maximum speed tends to infinity. Thus the classical energy inequality is not merely technically incomplete; in the forced setting, it is fundamentally incapable of ruling out this kind of singularity.
+
+**It supplies a new singularity mechanism, not just an existence verdict.** An anisotropically contracting vortex amplifies velocity, while carefully organized oscillatory pulses use nonlinear momentum flux to cancel the otherwise singular forcing residual. This converts internal multiscale transport into the exact stress needed to keep the external force smooth. If verified, that architecture becomes a concrete object for future analysis rather than a heuristic cascade scenario.
+
+**It redraws the research frontier.** The binary Clay question would be closed, but the scientifically central questions become sharper: Can an analogous mechanism occur when $\mathbf f=0$? Is the blowup stable under perturbations, or does it require exceptional fine-tuning? What is the codimension of singular data and forces? Can a weak solution continue beyond the singular time, and if several continuations exist, is there a canonical selection rule? Those questions govern whether the construction is an isolated mathematical possibility or part of a broader theory of three-dimensional flow.
+
+**It is also a milestone for AI-assisted mathematics.** A verified result of this scale would show that an AI research system can help produce a long, highly coupled proof architecture and a machine-checkable formal counterpart at the frontier of analysis. The methodological lesson would not be that formalization replaces mathematical understanding: the decisive standard remains semantic fidelity between the Lean definitions, the analytical PDF, and the classical problem. Rather, formal proof becomes an additional high-resolution audit channel for work too large to trust by informal inspection alone.
+
+The cleanest one-line interpretation is therefore:
+
+$$
+\boxed{
+\text{The forced Clay problem is resolved, but the unforced regularity problem and a general theory of singularity remain open.}
+}
+$$
+
+## 16. How far from “completely solving Navier–Stokes”?
 
 The phrase mixes several different goals.
 
