@@ -41,6 +41,11 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
 
+      - name: Normalize repository-prefixed assets
+        run: |
+          mv dist/client/openai-navier-stokes-results/_next dist/client/_next
+          rmdir dist/client/openai-navier-stokes-results
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
